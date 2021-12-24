@@ -1,23 +1,30 @@
 import { React } from 'react';
 import TodoItem from "../TodoItem";
 import "./TodoList.css";
+import { TodoContext } from '../TodoContext';
 
-const TodoList = ({ loading, error, todos, completedTodo, deleteTodo }) => {
+const TodoList = () => {
     return <>
-        <ul className={todos.length > 5 ? 'overflow' : ''}>
-            {loading && <div className='loader-wrapper'><span className="loader"></span></div>}
-            {error && <p>An error ocurred, please update the page</p>}
-            {(!loading && !todos.length) && <p>Create your first TODO</p>}
+        <TodoContext.Consumer>
             {
-                todos.map((element) => {
-                    return <TodoItem key={element.id}
-                        todo={element}
-                        completedTodo={completedTodo}
-                        deleteTodo={deleteTodo}
-                        class_name={"todo-item " + (element.completed ? "completed-item" : "")} />
-                })
+                ({ todos, loading, error, completedTodo, deleteTodo }) => {
+                    return (<ul className={todos.length > 5 ? 'overflow' : ''}>
+                        {loading && <div className='loader-wrapper'><span className="loader"></span></div>}
+                        {error && <p>An error ocurred, please update the page</p>}
+                        {(!loading && !todos.length) && <p>Create your first TODO</p>}
+                        {
+                            todos.map((element) => {
+                                return <TodoItem key={element.id}
+                                    todo={element}
+                                    completedTodo={completedTodo}
+                                    deleteTodo={deleteTodo}
+                                    class_name={"todo-item " + (element.completed ? "completed-item" : "")} />
+                            })
+                        }
+                    </ul>)
+                }
             }
-        </ul>
+        </TodoContext.Consumer>
     </>
 }
 
