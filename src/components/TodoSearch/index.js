@@ -1,22 +1,15 @@
-import { React } from 'react';
+import { React, useContext } from 'react';
 import "./TodoSearch.css";
 import { TodoContext } from '../TodoContext';
 
 
 const TodoSearch = () => {
+    const { todos, searchValue, setSearchValue } = useContext(TodoContext);
+    const onSearchValueChange = (e) => {
+        setSearchValue(e.target.value);
+    }
     return <section className="search-section">
-        <TodoContext.Consumer>
-            {
-                ({ todos, searchValue, setSearchValue }) => {
-                    const onSearchValueChange = (e) => {
-                        setSearchValue(e.target.value);
-                    }
-                    return (
-                        <input placeholder={!todos ? todos[0].content : 'Temp'} value={searchValue} onChange={onSearchValueChange} />
-                    )
-                }
-            }
-        </TodoContext.Consumer>
+        <input placeholder={!todos ? todos[0].content : 'Temp'} value={searchValue} onChange={onSearchValueChange} />
     </section>
 }
 

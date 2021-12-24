@@ -1,24 +1,18 @@
-import { React } from 'react';
+import { React, useContext } from 'react';
 import "./CreateTodoButton.css";
 import { TodoContext } from '../TodoContext';
 
 
 const CreateTodoButton = () => {
+    const { todos, saveTodos, searchValue, setSearchValue } = useContext(TodoContext);
+    const onUpdateElements = () => {
+        const arr = [...todos, { id: todos.length + 1, content: `${searchValue}`, completed: false }];
+        // setId(arr.length);
+        setSearchValue('');
+        return arr;
+    }
     return <>
-        <TodoContext.Consumer>
-            {
-                ({ todos, saveTodos, id, setId, searchValue, setSearchValue }) => {
-                    const onUpdateElements = () => {
-                        const arr = [...todos, { id: id, content: `${searchValue}`, completed: false }];
-                        setId(id + 1);
-                        setSearchValue('');
-                        return arr;
-                    }
-                    return (<button className="create-button" onClick={() => saveTodos(onUpdateElements())}>+</button>)
-                }
-            }
-        </TodoContext.Consumer>
-
+        <button className="create-button" onClick={() => saveTodos(onUpdateElements())}>+</button>
     </>
 }
 
