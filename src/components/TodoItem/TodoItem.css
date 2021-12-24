@@ -1,0 +1,41 @@
+.todo-item {
+  margin: 10px 20px;
+  margin-bottom: 20px;
+  border: 1px solid;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.todo-item .close {
+  position: relative;
+  right: -23px;
+  top: -15px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.todo-item .close:hover {
+  /* opacity: .5; */
+  color: brown;
+}
+
+.completed-item {
+  text-decoration: line-through;
+  border-color: #8dfb61;
+}
+
+.completed {
+  color: #8dfb61;
+}
+
+.notCompleted {
+  color: brown;
+}
+
+p {
+  margin: 0;
+}
