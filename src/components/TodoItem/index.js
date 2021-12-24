@@ -3,10 +3,10 @@ import './TodoItem.css';
 import { FaRegCircle, FaRegCheckCircle } from "react-icons/fa";
 import { TiDeleteOutline } from "react-icons/ti";
 
-const TodoItem = ({ todo, class_name, completedTodo, deleteTodo }) => {
+const TodoItem = ({ todo, class_name, completeTodo, deleteTodo }) => {
 
     const onCompleted = () => {
-        completedTodo(todo.id);
+        completeTodo(todo.id);
     }
 
     const onDelete = () => {
@@ -21,7 +21,10 @@ const TodoItem = ({ todo, class_name, completedTodo, deleteTodo }) => {
                     <FaRegCheckCircle className={todo.completed ? 'completed' : 'notCompleted'} onClick={onCompleted} />
                     : <FaRegCircle className={todo.completed ? 'completed' : 'notCompleted'} onClick={onCompleted} />
             }
-            <p>{todo.content}</p>
+            <div>
+                <h4>{todo.content}</h4>
+                <p>{todo.description}</p>
+            </div>
             <TiDeleteOutline className="close" onClick={onDelete} />
         </li>
     )

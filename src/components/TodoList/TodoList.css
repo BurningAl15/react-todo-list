@@ -21,6 +21,7 @@ ul {
     background-color: #0b0b0b;
     display: grid;
     place-items: center;
+    z-index: 99;
 }
 
 .loader {

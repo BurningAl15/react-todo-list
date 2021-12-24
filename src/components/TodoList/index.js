@@ -4,7 +4,7 @@ import "./TodoList.css";
 import { TodoContext } from '../TodoContext';
 
 const TodoList = () => {
-    const { todos, loading, error, completedTodo, deleteTodo } = useContext(TodoContext);
+    const { todos, loading, error, completeTodo, deleteTodo } = useContext(TodoContext);
     return <>
         <ul className={todos.length > 5 ? 'overflow' : ''}>
             {loading && <div className='loader-wrapper'><span className="loader"></span></div>}
@@ -14,7 +14,7 @@ const TodoList = () => {
                 todos.map((element) => {
                     return <TodoItem key={element.id}
                         todo={element}
-                        completedTodo={completedTodo}
+                        completeTodo={completeTodo}
                         deleteTodo={deleteTodo}
                         class_name={"todo-item " + (element.completed ? "completed-item" : "")} />
                 })

@@ -7,8 +7,12 @@ const TodoContext = createContext();
 function TodoProvider(props) {
     const { item: todos, saveItem: saveTodos, loading, error } = useLocalStorage('TODOS_V1', []);
 
-    const [id, setId] = useState(0);
     const [searchValue, setSearchValue] = useState('');
+    const [formNameValue, setFormNameValue] = useState('');
+    const [formDescriptionValue, setFormDescriptionValue] = useState('');
+
+
+    const [openModal, setOpenModal] = useState(false);
 
     const completedTodos = todos.filter((value) => !!value.completed).length;
     const totalTodos = todos.length;
@@ -50,6 +54,8 @@ function TodoProvider(props) {
 
     return (
         <TodoContext.Provider value={{
+            loading,
+            error,
             totalTodos,
             completedTodos,
             searchValue,
@@ -59,10 +65,12 @@ function TodoProvider(props) {
             searchedTodos: searchedTodos(),
             todos,
             saveTodos,
-            id,
-            loading,
-            error,
-            setId
+            openModal,
+            setOpenModal,
+            formNameValue,
+            setFormNameValue,
+            formDescriptionValue,
+            setFormDescriptionValue
         }}>
             {props.children}
         </TodoContext.Provider>
